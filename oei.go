@@ -1,9 +1,9 @@
 package oei
 
 import (
-	"path/filepath"
 	"log"
 	"os/exec"
+	"path/filepath"
 )
 
 // Simple error handler that prints the error and exits the program
@@ -24,5 +24,5 @@ func AssertExec(command string, args ...string) string {
 
 // Return the full filename without the file extension
 func FilenameWithoutExt(filename string) string {
-	return filename[:len(filename) - len(filepath.Ext(filename))]
+	return filename[:len(filename)-len(filepath.Ext(filename))]
 }
