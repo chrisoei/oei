@@ -1,6 +1,7 @@
 package oei
 
 import (
+	"path/filepath"
 	"log"
 	"os/exec"
 )
@@ -19,4 +20,9 @@ func AssertExec(command string, args ...string) string {
 	log.Println(outputString)
 	ErrorHandler(err)
 	return outputString
+}
+
+// Return the full filename without the file extension
+func FilenameWithoutExt(filename string) string {
+	return filename[:len(filename) - len(filepath.Ext(filename))]
 }
