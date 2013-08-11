@@ -2,6 +2,7 @@ package oei
 
 import (
 	"log"
+	"os"
 	"os/exec"
 	"path/filepath"
 )
@@ -25,4 +26,12 @@ func AssertExec(command string, args ...string) string {
 // Return the full filename without the file extension
 func FilenameWithoutExt(filename string) string {
 	return filename[:len(filename)-len(filepath.Ext(filename))]
+}
+
+func Home() string {
+	return os.Getenv("HOME")
+}
+
+func Dropbox() string {
+	return filepath.Join(Home(), "Dropbox")
 }
