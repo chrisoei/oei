@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 )
 
 // Simple error handler that prints the error and exits the program
@@ -16,9 +17,14 @@ func ErrorHandler(err error) {
 
 // Run a command with arguments, print the output, exit if any errors, return result
 func AssertExec(command string, args ...string) string {
+	if Verbose() > 0 {
+		log.Printf("%s %v\n", command, args)
+	}
 	output, err := exec.Command(command, args...).Output()
 	outputString := string(output)
-	log.Println(outputString)
+	if Verbose() > 0 {
+		log.Println(outputString)
+	}
 	ErrorHandler(err)
 	return outputString
 }
@@ -34,4 +40,14 @@ func Home() string {
 
 func Dropbox() string {
 	return filepath.Join(Home(), "Dropbox")
+}
+
+func Verbose() int64 {
+	v := os.Getenv("OEI_V")
+	if v == "" {
+		return 0
+	}
+	n, err := strconv.ParseInt(v, 10, 64)
+	ErrorHandler(err)
+	return n
 }
