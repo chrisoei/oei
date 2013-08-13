@@ -52,6 +52,8 @@ func Verbosity() int64 {
 		return 0
 	}
 	n, err := strconv.ParseInt(v, 10, 64)
-	ErrorHandler(err)
+	if err != nil {
+		log.Fatalln("Error in parsing verbosity: ", err)
+	}
 	return n
 }
