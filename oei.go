@@ -11,7 +11,11 @@ import (
 // Simple error handler that prints the error and exits the program
 func ErrorHandler(err error) {
 	if err != nil {
-		log.Fatalln("Error: ", err)
+		if Verbosity() > -100 {
+			log.Fatalln("Error: ", err)
+		} else {
+			os.Exit(1)
+		}
 	}
 }
 
