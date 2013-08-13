@@ -17,12 +17,12 @@ func ErrorHandler(err error) {
 
 // Run a command with arguments, print the output, exit if any errors, return result
 func AssertExec(command string, args ...string) string {
-	if Verbose() > 0 {
+	if Verbosity() > 0 {
 		log.Printf("%s %v\n", command, args)
 	}
 	output, err := exec.Command(command, args...).Output()
 	outputString := string(output)
-	if Verbose() > 0 {
+	if Verbosity() > 0 {
 		log.Println(outputString)
 	}
 	ErrorHandler(err)
@@ -42,7 +42,7 @@ func Dropbox() string {
 	return filepath.Join(Home(), "Dropbox")
 }
 
-func Verbose() int64 {
+func Verbosity() int64 {
 	v := os.Getenv("OEI_V")
 	if v == "" {
 		return 0
